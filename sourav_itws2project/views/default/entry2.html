@@ -1,0 +1,140 @@
+<html>
+<link href='http://fonts.googleapis.com/css?family=Sniglet' rel='stylesheet' type='text/css'>
+<link href="{{=URL('static', 'css/entry2.css')}}" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Ruluko' rel='stylesheet' type='text/css' />
+<script>
+function act(){
+document.getElementById("a6").style.display="";console.log("hello");}
+function act1(){
+document.getElementById("a6").style.display="None";console.log("hii");}
+window.addEventListener("load", act1)
+</script>
+<body>
+<div id="blur"></div>
+<div id="a">
+<font size="6">{{=message["fname"]}}</font><br>
+<font style="padding-left:12px;">Address: <span id='mapping1'>{{=message["Address"]}}</span>,{{=message["city"]}}</font><br>
+<font hidden>City:<span id='mapping2' >{{=message["city"]}}</span></font>
+<font style="padding-left:12px;">Price range: {{=message["price_range"]}}</font>
+<hr>
+<table id="content">
+<tr>
+
+
+<th>Nowshowing</th>
+<th>Show Time</th>     
+     
+<th>Duration</th>
+     
+
+</tr>
+{{ k=0}}
+{{for j in l:}}
+<tr>
+<td><font><a href="{{=URL(r=request,f='movie',args=j.id)}}">{{=j.fname}}</font></a></td>
+
+
+       
+<td>{{=z[k]}}</td>
+{{k=k+1}}       
+{{t=j.duration.split(":")}}
+<td>{{=t[0]}} hrs and {{=t[1]}} minutes</td>
+      
+
+
+</tr>
+{{pass}}
+</table>
+
+</div>
+
+<div id="a7">
+{{if auth.user and auth.user.email==message["email"]:}}
+<button onfocus="if(this.blur)this.blur()" onclick="act()"><font size="4">Administrative interface</font></button>
+{{pass}}
+</div>
+
+<div id="a6">
+{{if auth.user and auth.user.email==message["email"]:}}
+{{=form}}
+<font><a href="{{=URL(r=request,f='movie_list')}}"><h4>Check out movies list</h4></font></a>
+
+{{else:}}
+{{if auth.user:}}
+<h2>{{=auth.user.first_name}} You are not owner</h2>
+{{else:}}
+<h2>Please Login First</h2>
+{{pass}}
+{{pass}}
+</div>
+
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+</script>
+
+<script>
+
+function map(){
+p=document.getElementById("mapping1").innerHTML;
+p=p+','+document.getElementById("mapping2").innerHTML;
+n='https://maps.google.com/maps?f=d&saddr=&daddr='+p;
+
+n='https://maps.googleapis.com/maps/api/geocode/json?address='+p+'&sensor=false';
+console.log(n);
+
+
+
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+     s=xmlhttp.responseText;
+     j=eval('('+s+')')
+     console.log(j)
+function initialize()
+{
+var mapProp = {
+  center:new google.maps.LatLng(j.results[0].geometry.location.lat,j.results[0].geometry.location.lng),
+  zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+var map=new google.maps.Map(document.getElementById("a5"),mapProp);
+}
+
+initialize();
+
+
+
+    }
+  }
+xmlhttp.open("GET",n,true);
+xmlhttp.send();
+}
+
+loadXMLDoc();
+
+
+}
+map();
+
+</script>
+
+<div id="a5">
+</div>
+
+</body>
+</html>
+{{extend "navm.html"}}
+
+

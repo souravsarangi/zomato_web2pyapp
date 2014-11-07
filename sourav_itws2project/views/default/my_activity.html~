@@ -1,0 +1,44 @@
+
+<link href="{{=URL('static', 'css/profile.css')}}" rel="stylesheet" type="text/css" />
+<table id="profile">
+ <tr>
+  <td colspan="2"><img id="profilepic" src="{{=URL(r=request,f='download',args=[message["image"]])}}" /></td></tr><tr>
+  <td colspan="2"><b>{{=message.first_name}} {{=message.last_name}}</b></td></tr>
+  <tr><td>Email:</td><td>{{=message.email}}</td></tr>
+  <tr><td>Address:</td><td>{{=message.address}}</td></tr>
+  <tr><td>City:</td><td>{{=message.city}}</td></tr>
+  <tr><td>Phone:</td><td>{{=message.phone}}</td></tr>
+</table>
+
+
+<table id="comments">
+<tr><td colspan="3" style="text-align:center;">Activity so far</td></tr>
+{{tempvar=0}}
+<tr>
+{{for i in comment_list:}}
+<td>
+<a href="{{=URL(r=request,f='entry',args=i['place_id'])}}"><font size="4">{{=i["place"]}}</font></a>
+<h4>commented <i>as {{=i["commenti"]}}</i></h4>
+<h4>rated {{=i["review"]}}</h4>
+ 
+</td>
+{{tempvar+=1}}
+{{if tempvar%3==0:}}
+</tr><tr>
+{{pass}}
+{{pass}}
+</table>
+
+<div id="images">
+{{for i in photo:}}
+<a href="{{=URL(r=request,f='entry',args=i['place_id'])}}"><font size="4">{{=i["place"]}}</font></a></td>
+<img src="{{=URL(r=request,f='download',args=[i["picture"]])}}" />
+
+{{pass}}
+
+
+
+
+
+</div>
+{{extend "nav.html"}}

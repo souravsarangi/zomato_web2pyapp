@@ -1,0 +1,36 @@
+<html>
+  <script src="{{=URL('static','js/jquery.js')}}"></script>
+<link href='http://fonts.googleapis.com/css?family=Clicker+Script' rel='stylesheet' type='text/css'>
+<script>
+function f(){
+  document.getElementById('d1').style.display="None";
+  document.getElementById('d2').style.display="None";
+}
+</script>
+<script> 
+$(document).ready(function(){
+  $("#a1").hover(function(){
+    //$("#d2").hide();
+    $("#d1").slideToggle("slow");
+  });
+  $("#a2").hover(function(){
+    //$('#d1').hide();
+        //$("#d2").slideToggle("slow");
+    $("#d2").slideToggle("slow");
+  });
+});
+</script>
+
+<link href="{{=URL('static', 'css/main.css')}}" rel="stylesheet" type="text/css" />
+<body onload="f()">
+<table>
+   <tr>
+      <td id="a1" class="asa"><a href="./index3"><img src="{{=URL('static', 'images/movielogo.png')}}"></a></td>
+      <td id="a2"><a class="asa" href="./index2"><img src="{{=URL('static', 'images/restaurantlogo.jpg')}}"></a></td>
+   </tr>
+</table>
+<div id="d1"><font size="6">Get entangled by the latest movies in town</font></div>
+<div id="d2"><font size="6">Explore the heveanly world of food with us...</font></div>
+</body>
+</html>      
+{{extend "navm.html"}}

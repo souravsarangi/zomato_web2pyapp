@@ -1,0 +1,2 @@
+db=DAL("sqlite://storage.sqlite")
+db.define_table('text',Field('body'),Field('data'),Field('number'))

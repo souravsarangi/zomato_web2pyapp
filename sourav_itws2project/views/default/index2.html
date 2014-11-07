@@ -1,0 +1,119 @@
+<head>
+<link href="{{=URL('static', 'css/index2.css')}}" rel="stylesheet" type="text/css" />
+</head>
+<body onload="initialize()">
+   <div id="blur"></div>
+  <script src="{{=URL('static','js/jquery.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+<script>
+
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      a=xmlhttp.responseText;
+      d=eval('('+a+')');
+      var p=d.fname;
+      document.getElementById("links").innerHTML="";
+      for(i=0;i<p.length;i++)
+      {
+       if((i)%2==0)
+ 
+       var node=document.createElement("tr");
+       var noded=document.createElement("td");
+       noded.className="link_holder";
+       var tnode=document.createTextNode(p[i]);
+       var a=document.createElement("a");
+       a.href="./entry/"+d.id[i];
+       a.appendChild(tnode);
+       
+       
+      noded.appendChild(a);
+      node.appendChild(noded);
+      if((i)%2==1)
+      document.getElementById("links").appendChild(node);
+      node.addEventListener("click",function(e){
+		      document.getElementById("a").value=this.innerHTML;
+                      document.getElementById("links").innerHTML="";
+		      });
+      };
+      if(i%2==1)
+      document.getElementById("links").appendChild(node);
+
+    }
+   
+}
+x=document.getElementById("search").value;
+s="./get_search?p="+x;
+xmlhttp.open("GET",s,true);
+xmlhttp.send();
+};
+document.body.addEventListener("keyup",loadXMLDoc);
+</script>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript"> 
+  var geocoder;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+} 
+//Get the latitude and the longitude;
+function successFunction(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    codeLatLng(lat, lng)
+}
+
+function errorFunction(){
+    alert("Geocoder failed");
+}
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+
+
+
+  }
+
+  function codeLatLng(lat, lng) {
+
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results)
+        if (results[1]) {
+    
+        //city data
+        //alert(city.short_name + " " + city.long_name)
+        document.getElementById("geo").innerHTML=results[1].address_components[1].long_name
+        document.getElementById("search").value=results[1].address_components[1].long_name
+        loadXMLDoc()
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+</script>  
+<div id="hey">
+<div id="yup">
+<table id="links" style='border-spacing:15px;'></table></div></div>
+<input id="search" type='text' placeholder="search by Place or Name"></input>
+<button onclick="loadXMLDoc()">Go...</button>
+<div id="Quote"><h2>Discover finest places around you in <font id="geo"></font></h2></div>
+</body>
+{{extend "nav.html"}}

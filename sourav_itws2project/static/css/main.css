@@ -1,0 +1,53 @@
+html{
+  background:URL(../images/b3.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color:grey;
+  height:100%;
+  width:100%;
+}
+.asa img{
+width:300px;
+height:250px;
+opacity:0.5;
+border-radius:5%;
+}
+td{
+padding-left:40px;
+}
+table{
+position:fixed;
+top:20%;
+left:20%;
+}
+img:hover{
+opacity:1;
+}
+#d1{
+color:white;
+position:fixed;
+height:100px;
+width:300px;
+background-color:rgba(132,231,222,0.2);
+text-align:center;
+top:60%;
+left:23.5%;
+border-radius:4%;
+}
+#d2{
+color:white;
+position:fixed;
+height:100px;
+width:300px;
+background-color:rgba(132,231,222,0.2);
+text-align:center;
+top:60%;
+left:49.5%;
+border-radius:4%;
+}
+font{
+font-family: 'Clicker Script', cursive;
+}
+

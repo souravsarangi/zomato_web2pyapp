@@ -1,0 +1,26 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+
+<div id="blur"></div>
+<link href="{{=URL('static', 'css/create.css')}}" rel="stylesheet" type="text/css" />
+{{=form.custom.begin}}
+<table id="main">
+<tr><td>Name of Restaurent:</td><td> {{=form.custom.widget.fname}}</td></tr>
+<tr><td>City:</td><td> {{=form.custom.widget.city}}</td></tr>
+<tr><td>Phone:</td><td> {{=form.custom.widget.Phone}}</td></tr>
+
+<tr><td>Address: </td><td>{{=form.custom.widget.Address}}</td></tr>
+<tr><td>Pure veg:</td><td> {{=form.custom.widget.Pure_Veg}}</td></tr>
+<tr><td>Email Id: </td><td>{{=form.custom.widget.Email_id}}</td></tr>
+<tr><td id="tra" colspan="2">{{=form.custom.submit}}</td></tr>
+</table>
+
+
+{{=form.custom.end}}
+
+
+{{extend "nav.html"}}
+
+
+
+
+

@@ -1,0 +1,30 @@
+<html>
+<link href="{{=URL('static', 'css/movie_list.css')}}" rel="stylesheet" type="text/css" />
+
+<table id="content">
+<tr>
+<th>Movie Id</th>
+<th>Movie</th>
+</tr>
+{{for i in query:}}
+<tr>
+<td>
+{{=i.id}}</td>
+<td>{{=i.fname}}</td>
+</tr>
+{{pass}}
+</table>
+<div id="a">
+<button onclick="act()">Add Movie To list</button>
+</div>
+<div id="b">
+{{=form}}
+</div>
+<script>
+function act(){
+document.getElementById("b").style.display="";}
+function act1(){
+document.getElementById("b").style.display="None";}
+window.addEventListener("load",act1());
+</script>
+</html>

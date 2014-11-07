@@ -1,0 +1,44 @@
+body{
+background:URL('../images/bg4.jpg')no-repeat center center fixed rgba(255,255,255,0.3);
+background-size: contain;
+background-size: cover;
+}
+#profilepic{
+width:200px;
+height:200px;
+border-radius:2%;
+}
+#profile {
+position:fixed;
+top:6%;
+left:60%;
+text-align:center;
+color:#afeacb;
+background:rgba(0,0,0,0.7);
+filter:alpha(opacity=100);
+opacity:1;
+}
+#profile td{
+width:30%;
+padding:12px;
+}
+a{
+text-decoration:none;
+color:black;
+}
+#comments{
+position:absolute;
+top:10%;
+}
+#comments td{
+background:rgba(0,0,0,0.4);
+filter:alpha(opacity=100);
+opacity:1;
+color:white;
+padding:10px;
+}
+#images{
+position:absolute;
+top:60%;
+left:45%;
+}

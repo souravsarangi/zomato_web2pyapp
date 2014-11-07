@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link href="{{=URL('static', 'css/entry.css')}}" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+    <link href="{{=URL('static', 'css/js-image-slider.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{=URL('static', 'css/tooltip.css')}}" rel="stylesheet" type="text/css" />
+
+    <link href="{{=URL('static', 'css/generic.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{=URL('static', 'js/js-image-slider.js')}}"  type="text/javascript" ></script>
+    <script src="{{=URL('static', 'js/tooltip.js')}}"  type="text/javascript" ></script>
+
+<script>
+function act1(){
+document.getElementById("a2").style.display=""
+console.log("hiii")
+document.getElementById("a3").style.display=""
+document.getElementById("a4").style.display="None"
+document.getElementById("a5").style.display="None"
+document.getElementById("a6").style.display="None"
+document.getElementById("a7").style.display="None"
+
+
+}
+function act2(){
+document.getElementById("a3").style.display=""
+document.getElementById("a2").style.display="None"
+document.getElementById("a4").style.display="None"
+document.getElementById("a5").style.display="None"
+document.getElementById("a6").style.display="None"
+document.getElementById("a7").style.display="None"
+
+
+}
+function act3(){
+document.getElementById("a4").style.display=""
+document.getElementById("a2").style.display="None"
+document.getElementById("a3").style.display="None"
+document.getElementById("a5").style.display="None"
+document.getElementById("a6").style.display="None"
+document.getElementById("a7").style.display="None"
+
+
+}
+function act4(){
+document.getElementById("a4").style.display="None"
+document.getElementById("a2").style.display="None"
+document.getElementById("a3").style.display="None"
+document.getElementById("a5").style.display=""
+document.getElementById("a6").style.display="None"
+document.getElementById("a7").style.display="None"
+
+}
+function act5(){
+document.getElementById("a4").style.display="None"
+document.getElementById("a2").style.display="None"
+document.getElementById("a3").style.display="None"
+document.getElementById("a5").style.display="None"
+document.getElementById("a6").style.display=""
+document.getElementById("a7").style.display="None"
+
+}
+function act6(){
+document.getElementById("a4").style.display="None"
+document.getElementById("a2").style.display="None"
+document.getElementById("a3").style.display="None"
+document.getElementById("a5").style.display="None"
+document.getElementById("a6").style.display="None"
+document.getElementById("a7").style.display=""
+
+}
+
+window.addEventListener("load", act1)
+</script>
+</head>
+<body>
+<div id="blur"></div>
+<div id="a1">
+
+
+         <font size="6" id="header">{{=message["fname"]}}</font>
+
+
+   <table id="nvg">
+      <tr>
+            {{if len(message["Pure_Veg"])!=8:}}
+                    
+                   <td ><img id="nv" src="../../static/images/nv.jpg"></td>
+            {{pass}}
+            <td ><img id="v" src="../../static/images/v.jpg"></td>
+     </tr>
+     </table>
+
+         <hr>
+ <div id="rate"><br><font size="6">{{=message["Ratings"]}}<sub>/5</sub></font></div>
+    
+       <table id="contacts">
+       <tr><td colspan="1"><b>Address</b></td><td  colspan="3">: <i id="mapping">{{=message["Address"]}},{{=message["city"]}}</i></td></tr>
+       <tr><td><b>Email</b></td><td>: <i>{{=message["Email_id"]}}</i>
+       <b>Phone</b> </td><td>: <i>{{=message["Phone"]}}</i></td></tr>
+       </table>
+     
+     
+</div>
+<table id="buttons">
+<tr>
+<td><button onfocus="if(this.blur)this.blur()" onclick="act1()"><font size="4">comments</font></button></td>
+<!--<td><button onfocus="if(this.blur)this.blur()" onclick="act2()"><font size="4">Nearby restaurent</font></button></td>-->
+<td><button onfocus="if(this.blur)this.blur()" onclick="act3()"><font size="4">Gallery</font></button></td>
+<td><button onfocus="if(this.blur)this.blur()" onclick="map()"><font size="4">Maps</font></button></td>
+<td><button onfocus="if(this.blur)this.blur()" onclick="act5()"><font size="4">Menu</font></button></td>
+{{if auth.user:}}
+{{if auth.user.email==message["Email_id"]:}}
+
+
+<td>
+<button onfocus="if(this.blur)this.blur()" onclick="act6()"><font size="4">Administrative interface</font></button></td>
+{{pass}}
+{{pass}}
+</tr>
+
+
+
+</table>
+
+
+    <table id="tp">
+<tr>
+
+<td><a href="{{=URL(r=request,f='make_your_comment',args=message['place_id'])}}"><font size="4"> Post Your Comments here...</font></a></td>
+<td>
+<a href="{{=URL(r=request,f='share_image',args=message['place_id'])}}"><font size="4">Share images with us </font></a></td>
+</tr>
+</table>
+
+  <div id="a2">
+    <div id="init">
+
+   <hr>
+   {{for i in comment_list:}}
+   <table>
+      <tr>
+     <td rowspan="4"><img class="ppic" src="{{=URL(r=request,f='download',args=[i["image"]])}}" width=50px height=10px /></td>
+     <tr><td> <font size="4"><b>{{=i["person"]}}</b></font></td></tr><tr>
+    
+     <td class="comment"><i>{{=i["comment"]}}</i></td>
+     </tr>
+     </table>
+      
+      <div class="x"><font size="6"><mark>{{=i["review"]}}</mark></font></div><br>
+      <div class="time">{{=i["time"]}}</div>
+      <hr>
+{{pass}}
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<div id="a3">
+<div id="invo">
+{{tempvar2=1}}
+<table id="main"><tr><td>
+{{for i in nearby_places:}}
+<table class="nbr">
+<tr>
+<td colspan="2"><a href="{{=URL(r=request,f='entry',args=i.id)}}">{{=i.fname}},{{=message["city"]}}</a></td>
+</tr><tr><td><p>Phone no:</p></td><td><p>{{=i.Phone}}</p></td>
+</tr><tr><td><p>Email_id:</p></td><td><p>{{=i.Email_id}}</p></td>
+</tr>
+</table><hr>
+{{pass}}
+</td></tr></table>
+</div>
+</div>
+
+
+<div id="a6">
+<img  id="up" src="{{=URL(r=request,f='download',args=[message["menu"]])}}"/>
+</div>
+ 
+
+
+<div id="a4">
+
+    <div id="sliderFrame">
+        <div id="slider">                
+      {{for i in pictures:}}
+             <img class="rimg" src="{{=URL(r=request,f='download',args=[i.picture])}}" alt="{{=i["per"]}}"/>
+      {{pass}}
+         </div>
+       
+    </div>
+      
+</div>
+
+
+
+<script
+src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+</script>
+
+<script>
+function map(){
+p=document.getElementById("mapping").innerHTML
+console.log(p)
+n='https://maps.google.com/maps?f=d&saddr=&daddr='+p
+
+n='https://maps.googleapis.com/maps/api/geocode/json?address='+p+'&sensor=false'
+
+
+
+
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+     s=xmlhttp.responseText;
+     j=eval('('+s+')')
+     console.log(j.results[0].geometry.location.lat)
+function initialize()
+{
+var mapProp = {
+  center:new google.maps.LatLng(j.results[0].geometry.location.lat,j.results[0].geometry.location.lng),
+  zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+var map=new google.maps.Map(document.getElementById("a5"),mapProp);
+}
+
+initialize()
+
+
+
+
+
+
+
+
+
+
+
+    }
+  }
+xmlhttp.open("GET",n,true);
+xmlhttp.send();
+}
+
+loadXMLDoc()
+
+
+
+
+act4()
+}
+</script>
+<div id="a5">
+</div>
+<div id="a7">
+{{if auth.user and auth.user.email==message["Email_id"]:}}
+<!--	{{=form.custom.begin}}
+<table id="main">
+<tr><td>Name of Restaurent:</td><td> {{=form.custom.widget.fname}}</td></tr>
+<tr><td>City:</td><td> {{=form.custom.widget.city}}</td></tr>
+<tr><td>Phone:</td><td> {{=form.custom.widget.Phone}}</td></tr>
+
+<tr><td>Address: </td><td>{{=form.custom.widget.Address}}</td></tr>
+<tr><td>Pure veg:</td><td> {{=form.custom.widget.Pure_Veg}}</td></tr>
+<tr><td>Email Id: </td><td>{{=form.custom.widget.Email_id}}</td></tr>
+<tr><td>Want to delete </td><td>{{=form.custom.deletable}}</td></tr>
+<tr><td id="tra" colspan="2">{{=form.custom.submit}}</td></tr>
+</table>
+
+
+{{=form.custom.end}}
+--!>
+{{=form}}
+
+
+{{else:}}
+{{if auth.user:}}
+	<h2>You are not owner</h2>
+{{else:}}
+ <h2>Not Logged In</h2>
+{{pass}}
+{{pass}}
+</div>
+</html>
+{{extend "nav.html"}}

@@ -1,0 +1,23 @@
+<link href='http://fonts.googleapis.com/css?family=Sniglet' rel='stylesheet' type='text/css'>
+<link href="{{=URL('static', 'css/nav.css')}}" rel="stylesheet" type="text/css" />
+<table id="navigation" > 
+  <tr>
+    <td><a href ="{{=URL(r=request,f='my_activity')}}">Check your activity</a></td>
+
+    {{if not auth.user:}}
+     <td>{{=A('Login', _href=URL('default', 'user', args='login',
+    vars=dict(_next=URL(args=request.args, vars=request.vars))))}}</td>
+
+     <td>{{=A('register', _href=URL('default', 'user', args='register',
+    vars=dict(_next=URL(args=request.args, vars=request.vars))))}}</td>
+
+    {{else:}}
+    <td><a href ="{{=URL(r=request,f='my_activity')}}">Welcome {{=auth.user.first_name}}</a></td>
+     <td>{{=A('Logout', _href=URL('default', 'user', args='logout',
+    vars=dict(_next=URL(args=request.args, vars=request.vars))))}}</td>
+
+    {{pass}}
+  </tr>
+</table>
+<div id="logo"><a href="http://127.0.0.1:8000/nikhil/default/index"><img src="{{=URL('static', 'images/LOGO.png')}}"></a></div>
+

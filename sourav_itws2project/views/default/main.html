@@ -1,0 +1,29 @@
+<html>
+<script>
+function load() {
+	alert(1);
+	  // display loading image here...
+	  document.getElementById('loadingImg').visible = true;
+	    // request your data...
+	    var req =  new XMLHttpRequest();
+	      req.open("GET", '../index2', true);
+
+	        req.onreadystatechange = function() {
+			    if (req.readyState == 4 && req.status == 200) {
+				          // content is loaded...hide the gif and display the content...
+				          if (req.responseText) {
+						                  document.getElementById('xyz').innerHTML = req.responseText;
+							          document.getElementById('loadingImg').visible = false;
+								        }
+					      }
+			      };
+		  request.send(vars);
+}
+</script>
+<body onload="load()">
+<div id="loadingImg">
+<p>loading</p>
+</div>
+<div id="xyz"></div>
+</body>
+</html>

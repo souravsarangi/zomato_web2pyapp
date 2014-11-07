@@ -1,0 +1,83 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+<link href="{{=URL('static', 'css/myc.css')}}" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet' type='text/css'>
+<div id="blur"></div>
+<div id="back"></div>
+<form>
+<TEXTAREA type="textarea" name="comment" value="" placeholder="comment here....."></TEXTAREA><br>
+<font id="r">Your Rating:</font>
+<canvas id="ratingbox" width="400" height="20" style="border:1px solid black;"></canvas>
+    <div id="tmp"></div>
+    <div id="fix"></div> 
+    <script>
+     var x=document.getElementById("ratingbox");
+     var y=x.getContext("2d");
+     y.clearRect(0,0,400,20);
+     function getMousePos(canvas, evt) {
+         var rect = canvas.getBoundingClientRect();
+         return {
+           a: evt.clientX - rect.left,
+           b: evt.clientY - rect.top
+         };
+      }
+    function getquote(p){
+      if (p<=2) {return "Avoid(0-2)"}
+      else if(p<=4){ return "Blah!(2-4)"}
+      else if(p<=6){ return "Average(4-6)"}
+      else if(p<=8){ return "Great(6-8)"}
+      else {return "Insane(8-10)"}
+    }
+    function rate(p){
+     if (p<=2) {return 0.5}
+      else if(p<=4){ return 1.0}
+      else if(p<=6){ return 1.5}
+      else if(p<=8){ return 2.0}
+      else if(p<=10){ return 2.5}
+      else if(p<=12){ return 3.0}
+      else if(p<=14){ return 3.5}
+      else if(p<=16){ return 4.0}
+      else if(p<=18){ return 4.5}
+      else {return 5.0}
+}
+    function getcolor(p){
+      if (p<=2) {return "#990000"}
+      else if(p<=4){ return "#FF0000"}
+      else if(p<=6){ return "#FF6600"}
+      else if(p<=8){ return "#FF9900"}
+      else if(p<=10){ return "#CCFF00"}
+      else if(p<=12){ return "#66FF00"}
+      else if(p<=14){ return "#00FF00"}
+      else if(p<=16){ return "#00FFCC"}
+      else if(p<=18){ return "#0033FF"}
+else {return "#0000FF"} 
+    }
+
+    x.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(x, evt);
+ 	document.getElementById("tmp").innerHTML=rate((mousePos.a)/20);       
+        y.clearRect(0,0,400,20);
+        var t=1;
+        var u=0;
+        var tr=(mousePos.a)/40;
+        while(tr > t){
+           y.fillStyle=getcolor(2*t);
+           y.fillRect(u,0,40,20);
+           t+=1;
+           u+=40;   
+       }
+       y.fillStyle=getcolor((mousePos.a)/20);
+       y.fillRect(u,0,40,20);
+    });
+    x.addEventListener('click', function(evt) {
+        var mousePos = getMousePos(x, evt);
+ 	document.getElementById("rat").value=rate((mousePos.a)/20);
+        	document.getElementById("fix").innerHTML=rate((mousePos.a)/20);       
+    });
+  </script>
+    
+
+
+<input id="rat" type="hidden" name="review" value=""><br>
+<button>Post Your Comment</button>
+</form>
+<font id="m">{{=Result}}</font>

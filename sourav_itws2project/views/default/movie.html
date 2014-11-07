@@ -1,0 +1,79 @@
+<html>
+<body>
+<div id="blur"></div>
+<link href="{{=URL('static', 'css/mD.css')}}" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Henny+Penny' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+
+<div id="movieD">
+    <table id="main">
+    <tr>
+       <td rowspan="6">
+          <img id="pic" src="{{=URL(r=request,f='download',args=[query[0].image])}}" />
+       </td>
+    </tr>
+    <tr>
+       <td >
+         <font id="maina" size="8"><b>{{=query[0].fname}}</b></font>
+       </td>
+    </tr>
+    <tr>
+       <td >
+         <font><b>Ratings :</b>{{=query[0].rating}}</font>
+       </td>
+    </tr>
+    <tr>
+       <td>
+         <font><b>Released on </b>{{=query[0].release_date}}</font>
+       </td>
+    </tr>
+    <tr>
+    <td><font><b>Crew :</b>{{=query[0].crew}}</font></td></tr><tr>
+    <td><font><b>Director: </b>{{=query[0].director}}</font></td>
+    </tr>
+    <tr>
+    <td><b>Duration:</b>{{=c[0]}} hrs and {{=c[1]}} minutes</td></tr><tr>
+   <td colspan="2"><p><b>story: </b>{{=query[0].story}}</p><td>
+   </tr>
+   </table>
+<iframe width="30%" height="45%" src={{=query[0].link}} frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+
+
+
+
+ <div id="a2">
+    <div id="init">
+
+   <hr>
+   {{for i in comment_list:}}
+   <table>
+      <tr>
+     <td rowspan="4"><img class="ppic" src="{{=URL(r=request,f='download',args=[i["image"]])}}" width=50px height=10px /></td>
+     <tr><td> <font size="4"><b>{{=i["person"]}}</b></font></td></tr><tr>
+    
+     <td class="comment"><i>{{=i["comment"]}}</i></td>
+     </tr>
+     </table>
+      
+      <div class="x"><font size="6"><mark>{{=i["review"]}}</mark></font></div><br>
+      <div class="time">{{=i["time"]}}</div>
+      <hr>
+{{pass}}
+</div>
+
+</div>
+
+
+
+
+
+
+<a href="{{=URL(r=request,f='make_comment',args=query[0].id)}}"><font id="pyc">Post Your Comments here...</font></a>
+</body>
+
+</html>
+{{extend "navm.html"}}
